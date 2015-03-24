@@ -18,8 +18,7 @@ def import_events(client, file):
         entity_id=data[0],
         properties= {
           "sentence" : str(data[2]),
-          # convert the scale from 1~4 to 0~4
-          "sentiment" : (float(data[3]) - 1) * 4 / 3
+          "sentiment" : float(data[3])
         }
       )
     count += 1
