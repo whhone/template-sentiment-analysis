@@ -9,9 +9,9 @@
   },
   "algorithms": [
     {
-      "name": "dummy",
+      "name": "nlpparse",
       "params": {
-        
+        "baseWeight": 1
       }
     }
   ]

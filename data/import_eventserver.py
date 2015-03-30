@@ -13,11 +13,11 @@ def import_events(client, file):
     data = line.rstrip('\r\n').split("\t")
     if True:
       client.create_event(
-        event="rate",
+        event="train",
         entity_type="user",
         entity_id=data[0],
         properties= {
-          "sentence" : str(data[2]),
+          "phrase" : str(data[2]),
           "sentiment" : float(data[3])
         }
       )
@@ -41,6 +41,6 @@ if __name__ == '__main__':
   client = predictionio.EventClient(
     access_key=args.access_key,
     url=args.url,
-    threads=5,
-    qsize=500)
+    threads=10,
+    qsize=1000)
   import_events(client, args.file)

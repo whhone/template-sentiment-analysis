@@ -16,7 +16,7 @@ object SentimentAnalysisEngine extends IEngineFactory {
     new Engine(
       classOf[DataSource],
       classOf[Preparator],
-      Map("dummy" -> classOf[DummyAlgorithm]),
+      Map("nlpparse" -> classOf[Algorithm]),
       classOf[Serving])
   }
 }

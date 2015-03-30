@@ -27,18 +27,18 @@ class DataSource(val dsp: DataSourceParams)
     val eventsRDD: RDD[Event] = eventsDB.find(
       appId = dsp.appId,
       entityType = Some("user"),
-      eventNames = Some(List("rate"))
+      eventNames = Some(List("train"))
     )(sc)
     
     val sentimentsRDD: RDD[Sentiment] = eventsRDD.map { event =>
       val sentiment = try {
          val sentimentValue: Double = event.event match {
-          case "rate" => event.properties.get[Double]("sentiment")
+          case "train" => event.properties.get[Double]("sentiment")
           case _ => throw new Exception(s"Unexpected event ${event} is read.")
         }
       
         Sentiment(
-          event.properties.get[String]("phase"),
+          event.properties.get[String]("phrase"),
           sentimentValue
         )
       } catch {

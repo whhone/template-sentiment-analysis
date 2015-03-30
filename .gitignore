@@ -2,4 +2,8 @@ manifest.json
 pio.log
 /pio.sbt
 target/
+data/*.csv
+data/*.tsv
+data/*.zip
+data/gen_submission.py
 *~
