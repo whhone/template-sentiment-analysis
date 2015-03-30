@@ -7,3 +7,4 @@ data/*.tsv
 data/*.zip
 data/gen_submission.py
 *~
+*.swp

@@ -13,7 +13,7 @@ The engine uses the stanford CoreNLP library and the Scala binding `gangeli/Core
 ## import sample data
 
 ```
-$ python data/import_eventserver.py --access_key <your_access_key>
+$ python data/import_eventserver.py --access_key <your_access_key> --file data/train.tsv
 ```
 
 The sample training data comes from https://www.kaggle.com/c/sentiment-analysis-on-movie-reviews. It is a tsv file. Each line contains 4 data, `PhraseId`, `SentenceId`, `Phrase` and `Sentiment`. 
