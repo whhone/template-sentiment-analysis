@@ -34,9 +34,8 @@ class Model (
   def getSentiment(s: String, ap: AlgorithmParams): Double = {
     var m = scala.collection.mutable.Map[Tree, Double]()
     var tree = s.parse
-    var it = tree.iterator
-    val root = tree.preOrderNodeList().get(0)
-    val post_order = tree.postOrderNodeList()
+    var root = tree.preOrderNodeList().get(0)
+    var post_order = tree.postOrderNodeList()
     var i = 0
     while (i < post_order.size()) {
       var cur = post_order.get(i)
@@ -45,7 +44,7 @@ class Model (
       if (cur.isLeaf()) {
         m(cur) = getWordSentiment(cur.value)
       } else {
-        val children = cur.children()
+        var children = cur.children()
         var weight = 0.0000000001
         var positive = 1
         var sentiment = 0.0
@@ -60,7 +59,7 @@ class Model (
 
           weight = weight + child_weight
           sentiment = sentiment + child_weight * Math.abs(child_sentiment)
-          if (child_sentiment < -0.0000001) {
+          if (child_sentiment < -0.0000000001) {
             positive = positive * -1
           }
         }
