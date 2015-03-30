@@ -28,24 +28,22 @@ class DataSource(val dsp: DataSourceParams)
       appId = dsp.appId,
       entityType = Some("user"),
       eventNames = Some(List("train"))
-    )(sc)
+    ) (sc)
     
     val sentimentsRDD: RDD[Sentiment] = eventsRDD.map { event =>
       val sentiment = try {
-         val sentimentValue: Double = event.event match {
+        val sentimentValue: Double = event.event match {
           case "train" => event.properties.get[Double]("sentiment")
           case _ => throw new Exception(s"Unexpected event ${event} is read.")
         }
       
         Sentiment(
           event.properties.get[String]("phrase"),
-          sentimentValue
-        )
+          sentimentValue)
       } catch {
         case e: Exception => {
           logger.error(
-            s"Cannot convert ${event} to Sentiment. Exception: ${e}."
-          )
+            s"Cannot convert ${event} to Sentiment. Exception: ${e}.")
           throw e
         }
       }

@@ -22,7 +22,8 @@ class Algorithm(val ap: AlgorithmParams)
   @transient lazy val logger = Logger[this.type]
 
   def train(sc: SparkContext, data: PreparedData): Model = {
-    require(!data.sentiments.take(1).isEmpty,
+    require(
+      !data.sentiments.take(1).isEmpty,
       s"RDD[sentiments] in PreparedData cannot be empty." +
       " Please check if DataSource generates TrainingData" +
       " and Preprator generates PreparedData correctly.")
@@ -30,20 +31,16 @@ class Algorithm(val ap: AlgorithmParams)
     val itemSets: RDD[(String, Double)] = data.sentiments.map(
       s => (s.phrase.toLowerCase(), s.sentiment)
     ).cache()
-
+    
+    // assume the last training data is the most up-to-date
     val rules = itemSets.groupByKey
-      .mapValues(
-        // assume the last training data is the most up-to-date
-        iter => iter.toVector.last
-      )
-    .collectAsMap.toMap
+                        .mapValues(iter => iter.toVector.last)
+                        .collectAsMap.toMap
 
     new Model(rules)
   }
 
   def predict(model: Model, query: Query): PredictedResult = {
-    new PredictedResult(
-      model.getSentiment(query.s, ap)
-    )
+    new PredictedResult(model.getSentiment(query.s, ap))
   }
 }
