@@ -1,6 +1,6 @@
 package org.template.sentimentanalysis
 
-import io.prediction.controller.PAlgorithm
+import io.prediction.controller.P2LAlgorithm
 import io.prediction.controller.Params
 import io.prediction.data.storage.BiMap
 
@@ -17,7 +17,7 @@ case class AlgorithmParams(
 )extends Params
 
 class Algorithm(val ap: AlgorithmParams)
-  extends PAlgorithm[PreparedData, Model, Query, PredictedResult] {
+  extends P2LAlgorithm[PreparedData, Model, Query, PredictedResult] {
 
   @transient lazy val logger = Logger[this.type]
 
