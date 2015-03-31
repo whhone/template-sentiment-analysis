@@ -4,7 +4,7 @@ assemblySettings
 
 name := "template-scala-sentiment-analysis"
 
-organization := "io.prediction"
+organization := "com.whhone"
 
 excludeFilter in unmanagedSources := "Berkeley.scala"
 
