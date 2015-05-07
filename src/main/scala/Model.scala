@@ -55,13 +55,10 @@ class Model (
           // The weight of a the child is proportional to the absolute value
           // of its sentiment. It avoid the sentiment to be neutralized by
           // other neutral childs
-          var child_weight = Math.abs(child_sentiment) + ap.baseWeight
+          var child_weight = Math.abs(child_sentiment) * ap.baseWeight
 
           weight = weight + child_weight
-          sentiment = sentiment + child_weight * Math.abs(child_sentiment)
-          if (child_sentiment < -0.0000000001) {
-            positive = positive * -1
-          }
+          sentiment = sentiment + child_weight * child_sentiment
         }
         m(cur) = ( sentiment / weight ) * positive
       }
