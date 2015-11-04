@@ -33,7 +33,7 @@ if __name__ == '__main__':
     description="Import sample data for sentiment analysis engine")
   parser.add_argument('--access_key', default='invalid-access-key')
   parser.add_argument('--url', default="http://localhost:7070")
-  parser.add_argument('--file', default="./train.tsv")
+  parser.add_argument('--file', default="./data/train.tsv")
 
   args = parser.parse_args()
   print args
